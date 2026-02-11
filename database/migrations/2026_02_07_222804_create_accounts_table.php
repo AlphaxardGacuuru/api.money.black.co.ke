@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('icon');
+            $table->string('color');
+            $table->string('name');
+            $table->string('type')->nullable();
+            $table->longText('description')->nullable();
+            $table->string('currency')->default('KES');
+            $table->boolean('is_default')->default(false);
+            $table->integer('balance')->default(0);
             $table->timestamps();
         });
     }
